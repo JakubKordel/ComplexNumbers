@@ -3,6 +3,7 @@
 //
 
 #include "ComplexNumList.h"
+#include <stdexcept>
 
 ComplexNumList::ComplexNumList(){
     head = nullptr;
@@ -19,34 +20,44 @@ void ComplexNumList::addElement( const ComplexNum & cNum ){
     head = newEl;
 }
 
-void ComplexNumList::deleteElement( const ComplexNum & cNum ){
-
-    \\ TODO \\
+void ComplexNumList::deleteElement( std::size_t i ){
+    Element * temp = head;
+	while 
 
 }
 
 ComplexNumList ComplexNumList::operator+( const ComplexNumList & list ){
-
-    \\ TODO \\
+	Element * temp = head;
+    
 
 }
 
 void ComplexNumList::operator+=( const ComplexNumList & list ){
 
-    \\ TODO \\
+    // TODO 
 }
 
 std::ostream operator<<( std::ostream & os, const & ComplexNumList ){
 
-    \\ TODO \\
+    // TODO
 }
 
-ComplexNum & ComplexNumList::operator[](){
+ComplexNum & ComplexNumList::operator[]( std::size_t index ){
 
-    \\ TODO \\
+	Element* node = head;
+	while( index-- ) {
+		if(node == nullptr) {
+			throw std::out_of_range{"invalid index int ComplexNumList::operator[]"};
+		}
+
+		node = node->head;	
+	}
+
+	return node->num;
+
 }
 
 void ComplexNumList::clearList(){
 
-    \\ TODO \\
+    // TODO 
 }

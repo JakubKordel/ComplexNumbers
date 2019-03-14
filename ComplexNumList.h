@@ -9,12 +9,15 @@
 #include <iostream>
 #include <string>
 
-struct Element {
-    ComplexNum num;
-    Element * next;
-};
+
 
 class ComplexNumList {
+
+	struct Element {
+   		ComplexNum num;
+   	 	Element * next;
+	};
+
     Element * head;
 public:
     ComplexNumList();
