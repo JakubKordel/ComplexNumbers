@@ -3,10 +3,10 @@
 //
 
 #include "ComplexNumList.h"
-#include <stdexcept>
 
 ComplexNumList::ComplexNumList(){
     head = nullptr;
+    numEl = 0;
 }
 
 ComplexNumList::~ComplexNumList(){
@@ -18,18 +18,27 @@ void ComplexNumList::addElement( const ComplexNum & cNum ){
     newEl ->num = cNum;
     newEl ->next = head;
     head = newEl;
+    ++numEl;
 }
 
-void ComplexNumList::deleteElement( std::size_t i ){
-    Element * temp = head;
-	while 
-
+void ComplexNumList::deleteElement( std::size_t index ){
+    ComplexNumList &list = *this;
+    if ( index > 0 && index < numEl ) {
+        Element * buf = list[index + 1];
+        delete list[index];
+        --numEl;
+        list[index - 1]->next = buf;
+    }
+    else if ( index == 0 ){
+        Element * buf = list[1];
+        delete list [0];
+        head = buf;
+        --numEl;
+    }
 }
 
 ComplexNumList ComplexNumList::operator+( const ComplexNumList & list ){
 	Element * temp = head;
-    
-
 }
 
 void ComplexNumList::operator+=( const ComplexNumList & list ){
@@ -37,27 +46,33 @@ void ComplexNumList::operator+=( const ComplexNumList & list ){
     // TODO 
 }
 
-std::ostream operator<<( std::ostream & os, const & ComplexNumList ){
-
-    // TODO
+std::ostream & operator<<( std::ostream & os, const ComplexNumList & list ){
+    ComplexNumList::Element * temp = list.head;
+    while ( temp ){
+        os << temp ->num << std::endl;
+        temp = temp ->next;
+    }
+    return os;
 }
 
-ComplexNum & ComplexNumList::operator[]( std::size_t index ){
-
-	Element* node = head;
-	while( index-- ) {
-		if(node == nullptr) {
-			throw std::out_of_range{"invalid index int ComplexNumList::operator[]"};
-		}
-
-		node = node->head;	
+ComplexNumList::Element * ComplexNumList::operator[]( std::size_t index ){
+	if ( index >= numEl || index < 0 )
+	    return nullptr;
+    Element * temp = head;
+	while( index-- ){
+		temp = temp ->next;
 	}
+	return temp;
+}
 
-	return node->num;
-
+size_t ComplexNumList::numberOfElements(){
+    return numEl;
 }
 
 void ComplexNumList::clearList(){
-
-    // TODO 
+    ComplexNumList & list = *this;
+    while ( numEl != 0 ){
+        deleteElement(0);
+    }
 }
+

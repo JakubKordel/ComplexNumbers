@@ -10,7 +10,6 @@
 #include <string>
 
 
-
 class ComplexNumList {
 
 	struct Element {
@@ -19,15 +18,17 @@ class ComplexNumList {
 	};
 
     Element * head;
+    size_t numEl;
 public:
     ComplexNumList();
     ~ComplexNumList();
     void addElement( const ComplexNum & cNum );
-    void deleteElement( const ComplexNum & cNum );
+    void deleteElement( std::size_t index );
     ComplexNumList operator+( const ComplexNumList & list );
     void operator+=( const ComplexNumList & list );
-    friend std::ostream operator<<( std::ostream & os, const & ComplexNumList );
-    ComplexNum & operator[]();
+    friend std::ostream & operator<<( std::ostream & os, const ComplexNumList & list );
+    Element * operator[]( std::size_t index );
+    size_t numberOfElements();
     void clearList();
 };
 
