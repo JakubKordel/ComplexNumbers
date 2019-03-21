@@ -19,6 +19,9 @@ class ComplexNumList {
 
     Element * head;
     size_t numEl;
+
+	Element * getElement( std::size_t index );
+
 public:
     ComplexNumList();
     ~ComplexNumList();
@@ -27,7 +30,7 @@ public:
     ComplexNumList operator+( const ComplexNumList & list );
     void operator+=( const ComplexNumList & list );
     friend std::ostream & operator<<( std::ostream & os, const ComplexNumList & list );
-    Element * operator[]( std::size_t index );
+    ComplexNum & operator[]( std::size_t index );
     size_t numberOfElements();
     void clearList();
 };

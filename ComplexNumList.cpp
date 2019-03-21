@@ -22,28 +22,41 @@ void ComplexNumList::addElement( const ComplexNum & cNum ){
 }
 
 void ComplexNumList::deleteElement( std::size_t index ){
-    ComplexNumList &list = *this;
     if ( index > 0 && index < numEl ) {
-        Element * buf = list[index + 1];
-        delete list[index];
+        Element * buf = getElement(index + 1);
+        delete getElement(index);
         --numEl;
-        list[index - 1]->next = buf;
+        getElement(index - 1)->next = buf;
     }
     else if ( index == 0 ){
-        Element * buf = list[1];
-        delete list [0];
+        Element * buf = getElement(1);
+        delete getElement(0);
         head = buf;
         --numEl;
     }
 }
 
-ComplexNumList ComplexNumList::operator+( const ComplexNumList & list ){
-	Element * temp = head;
+ComplexNumList ComplexNumList::operator+(const ComplexNumList & list ) const {
+	ComplexNumList newList;
+	Element * temp = list.head;
+	while ( temp ){
+		newList.addElement( temp ->num );
+		temp = temp ->next;
+	}
+	temp = head;
+	while ( temp ){
+		newList.addElement( temp ->num );
+		temp = temp ->next;
+	}
+	return newList;
 }
 
 void ComplexNumList::operator+=( const ComplexNumList & list ){
-
-    // TODO 
+	Element * temp = list.head;
+	while ( temp ){
+		addElement( temp ->num );
+		temp = temp ->next;
+	}
 }
 
 std::ostream & operator<<( std::ostream & os, const ComplexNumList & list ){
@@ -55,7 +68,12 @@ std::ostream & operator<<( std::ostream & os, const ComplexNumList & list ){
     return os;
 }
 
-ComplexNumList::Element * ComplexNumList::operator[]( std::size_t index ){
+
+ComplexNum & ComplexNumList::operator[]( std::size_t index ){
+	return getElement( index );
+}
+
+ComplexNumList::Element * ComplexNumList::getElement( std::size_t index ){
 	if ( index >= numEl || index < 0 )
 	    return nullptr;
     Element * temp = head;
@@ -70,7 +88,6 @@ size_t ComplexNumList::numberOfElements(){
 }
 
 void ComplexNumList::clearList(){
-    ComplexNumList & list = *this;
     while ( numEl != 0 ){
         deleteElement(0);
     }
