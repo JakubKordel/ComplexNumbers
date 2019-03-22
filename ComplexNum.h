@@ -14,6 +14,7 @@ protected:
     double imPart;
 public:
     ComplexNum( double real = 0, double im = 0 );
+    void set( double real = 0, double im = 0 );
     void operator=( const ComplexNum & cNum );
     ComplexNum operator+( const ComplexNum & cNum );
     void operator+=( const ComplexNum & cNum );

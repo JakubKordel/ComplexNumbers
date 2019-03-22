@@ -9,6 +9,12 @@ ComplexNumList::ComplexNumList(){
     numEl = 0;
 }
 
+ComplexNumList::ComplexNumList( const ComplexNumList & list ){
+    head = nullptr;
+    numEl = 0;
+    *this = list;
+}
+
 ComplexNumList::~ComplexNumList(){
     clearList();
 }
@@ -37,26 +43,17 @@ void ComplexNumList::deleteElement( std::size_t index ){
 }
 
 ComplexNumList ComplexNumList::operator+(const ComplexNumList & list ) const {
-	ComplexNumList newList;
-	Element * temp = list.head;
-	while ( temp ){
-		newList.addElement( temp ->num );
-		temp = temp ->next;
-	}
-	temp = head;
-	while ( temp ){
-		newList.addElement( temp ->num );
-		temp = temp ->next;
-	}
-	return newList;
+    ComplexNumList newList( *this );
+    return newList += list;
 }
 
-void ComplexNumList::operator+=( const ComplexNumList & list ){
-	Element * temp = list.head;
-	while ( temp ){
-		addElement( temp ->num );
-		temp = temp ->next;
-	}
+ComplexNumList ComplexNumList::operator+=( const ComplexNumList & list ){
+    Element * temp = list.head;
+    while ( temp ){
+        addElement( temp ->num );
+        temp = temp ->next;
+    }
+    return *this;
 }
 
 std::ostream & operator<<( std::ostream & os, const ComplexNumList & list ){
@@ -69,27 +66,37 @@ std::ostream & operator<<( std::ostream & os, const ComplexNumList & list ){
 }
 
 
-ComplexNum & ComplexNumList::operator[]( std::size_t index ){
-	return getElement( index );
+ComplexNum & ComplexNumList::operator[]( std::size_t index ) {
+    return getElement( index ) ->num;
 }
 
 ComplexNumList::Element * ComplexNumList::getElement( std::size_t index ){
-	if ( index >= numEl || index < 0 )
-	    return nullptr;
+    if ( index >= numEl || index < 0 )
+        return nullptr;
     Element * temp = head;
-	while( index-- ){
-		temp = temp ->next;
-	}
-	return temp;
+    while( index-- ){
+        temp = temp ->next;
+    }
+    return temp;
 }
 
-size_t ComplexNumList::numberOfElements(){
+size_t ComplexNumList::numberOfElements() const {
     return numEl;
 }
 
 void ComplexNumList::clearList(){
-    while ( numEl != 0 ){
+    while ( numEl ){
         deleteElement(0);
     }
+}
+
+ComplexNumList ComplexNumList::operator=( const ComplexNumList & list ) {
+    clearList();
+    Element * temp = list.head;
+    while ( temp ){
+        addElement( temp ->num );
+        temp = temp ->next;
+    }
+    return *this;
 }
 

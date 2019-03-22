@@ -9,6 +9,11 @@ ComplexNum::ComplexNum ( double real, double im ){
     imPart = im;
 }
 
+void ComplexNum::set( double real, double im ){
+    realPart = real;
+    imPart = im;
+}
+
 void ComplexNum::operator=( const ComplexNum & cNum ){
     realPart = cNum.realPart;
     imPart = cNum.imPart;

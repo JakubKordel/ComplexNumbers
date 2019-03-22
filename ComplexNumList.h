@@ -12,26 +12,28 @@
 
 class ComplexNumList {
 
-	struct Element {
-   		ComplexNum num;
-   	 	Element * next;
-	};
+    struct Element {
+        ComplexNum num;
+        Element * next;
+    };
 
     Element * head;
     size_t numEl;
 
-	Element * getElement( std::size_t index );
+    Element * getElement( std::size_t index );
 
 public:
     ComplexNumList();
+    ComplexNumList( const ComplexNumList & list );
     ~ComplexNumList();
     void addElement( const ComplexNum & cNum );
     void deleteElement( std::size_t index );
-    ComplexNumList operator+( const ComplexNumList & list );
-    void operator+=( const ComplexNumList & list );
+    ComplexNumList operator=( const ComplexNumList & list );
+    ComplexNumList operator+( const ComplexNumList & list ) const;
+    ComplexNumList operator+=( const ComplexNumList & list );
     friend std::ostream & operator<<( std::ostream & os, const ComplexNumList & list );
     ComplexNum & operator[]( std::size_t index );
-    size_t numberOfElements();
+    size_t numberOfElements() const ;
     void clearList();
 };
 
