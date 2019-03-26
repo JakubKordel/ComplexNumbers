@@ -15,11 +15,11 @@ protected:
 public:
     ComplexNum( double real = 0, double im = 0 );
     void set( double real = 0, double im = 0 );
-    void operator=( const ComplexNum & cNum );
+    ComplexNum & operator=( const ComplexNum & cNum );
     ComplexNum operator+( const ComplexNum & cNum );
-    void operator+=( const ComplexNum & cNum );
+    ComplexNum & operator+=( const ComplexNum & cNum );
     ComplexNum operator-( const ComplexNum & cNum );
-    void operator-=( const ComplexNum & cNum );
+    ComplexNum & operator-=( const ComplexNum & cNum );
     bool operator==( const ComplexNum & cNum );
     bool operator!=( const ComplexNum & cNum );
     friend std::ostream & operator<<( std::ostream & os, const ComplexNum & cNum );

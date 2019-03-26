@@ -47,7 +47,7 @@ ComplexNumList ComplexNumList::operator+(const ComplexNumList & list ) const {
     return newList += list;
 }
 
-ComplexNumList ComplexNumList::operator+=( const ComplexNumList & list ){
+ComplexNumList & ComplexNumList::operator+=( const ComplexNumList & list ){
     Element * temp = list.head;
     while ( temp ){
         addElement( temp ->num );
@@ -66,11 +66,11 @@ std::ostream & operator<<( std::ostream & os, const ComplexNumList & list ){
 }
 
 
-ComplexNum & ComplexNumList::operator[]( std::size_t index ) {
+ComplexNum & ComplexNumList::operator[]( std::size_t index ) const {
     return getElement( index ) ->num;
 }
 
-ComplexNumList::Element * ComplexNumList::getElement( std::size_t index ){
+ComplexNumList::Element * ComplexNumList::getElement( std::size_t index ) const {
     if ( index >= numEl || index < 0 )
         return nullptr;
     Element * temp = head;
@@ -90,7 +90,7 @@ void ComplexNumList::clearList(){
     }
 }
 
-ComplexNumList ComplexNumList::operator=( const ComplexNumList & list ) {
+ComplexNumList & ComplexNumList::operator=( const ComplexNumList & list ) {
     clearList();
     Element * temp = list.head;
     while ( temp ){
@@ -99,4 +99,5 @@ ComplexNumList ComplexNumList::operator=( const ComplexNumList & list ) {
     }
     return *this;
 }
+
 

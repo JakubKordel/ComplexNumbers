@@ -14,9 +14,10 @@ void ComplexNum::set( double real, double im ){
     imPart = im;
 }
 
-void ComplexNum::operator=( const ComplexNum & cNum ){
+ComplexNum & ComplexNum::operator=( const ComplexNum & cNum ){
     realPart = cNum.realPart;
     imPart = cNum.imPart;
+    return *this;
 }
 
 ComplexNum ComplexNum::operator+( const ComplexNum & cNum ){
@@ -24,9 +25,10 @@ ComplexNum ComplexNum::operator+( const ComplexNum & cNum ){
     return sum;
 }
 
-void ComplexNum::operator+=( const ComplexNum & cNum ){
+ComplexNum & ComplexNum::operator+=( const ComplexNum & cNum ){
     realPart += cNum.realPart;
     imPart += cNum.imPart;
+    return *this;
 }
 
 ComplexNum ComplexNum::operator-( const ComplexNum & cNum ){
@@ -34,9 +36,10 @@ ComplexNum ComplexNum::operator-( const ComplexNum & cNum ){
     return diff;
 }
 
-void ComplexNum::operator-=( const ComplexNum & cNum ){
+ComplexNum & ComplexNum::operator-=( const ComplexNum & cNum ){
     realPart -= cNum.realPart;
     imPart -= cNum.imPart;
+    return *this;
 }
 
 bool ComplexNum::operator== ( const ComplexNum & cNum ){
